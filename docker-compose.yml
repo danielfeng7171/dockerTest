@@ -1,0 +1,10 @@
+version: '2'
+services:
+  api:
+    image: docker-test
+    build: .
+    container_name: "docker-test"
+    environment:
+      - DOCKER_VARIABLE=testfromyaml
+    volumes:
+      - "./.env:/dockerTest/.env"
