@@ -1,3 +1,4 @@
+name: github action test
 on: [push]
 
 jobs:
@@ -12,10 +13,9 @@ jobs:
     - name: Get the output time
       run: echo "The time was ${{ steps.hello.outputs.time }}"
     # build docker image
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-    - name: Hello world action step
-      id: hello
-      uses: actions/hello-world-docker-action@v1
-      with:
-        who-to-greet: 'Mona the Octocat'
+    #- name: Build the Docker image
+    #  run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Build the docker image through docker-compose
+      run: docker-compose build
+    - name: start app
+      run: docker-compose up
