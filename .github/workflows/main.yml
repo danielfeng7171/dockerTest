@@ -33,12 +33,18 @@ jobs:
       uses: webfactory/ssh-agent@v0.1.1
       with:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-    - name: test secrets
-      env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      run: echo "$SSH_PRIVATE_KEY"
+    # - name: Setup SSH Keys and known_hosts
+    #   env:
+    #       SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+    #       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+    #   run: |
+    #       mkdir -p ~/.ssh
+    #       ssh-keyscan github.com >> ~/.ssh/known_hosts
+    #       ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+    #       ssh-add - <<< " $SSH_PRIVATE_KEY"
+    #       echo "$SSH_PRIVATE_KEY"
     - name: check ssh key
-      run: echo $SSH_AUTH_SOCK | export
+      run: ssh-add -l
     # To use this repository's private action, you must check out the repository
     # - name: checkout
     #   uses: actions/checkout@v1
