@@ -4,13 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ts-node app/server/src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.2.0",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.11",
+    "ts-node": "^8.5.2",
+    "tslib": "^1.10.0",
+    "typescript": "^3.7.2"
   }
 }

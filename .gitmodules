@@ -1,0 +1,6 @@
+[submodule "app/server/src/api"]
+	path = app/server/src/api
+	url = git@github.com:processand-technologies/idh_backend_api_dev.git
+[submodule "env"]
+	path = env
+	url = git@github.com:processand-technologies/idh_backend_env_dev.git

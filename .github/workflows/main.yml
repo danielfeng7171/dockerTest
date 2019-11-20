@@ -1,21 +1,40 @@
-name: github action test
+# name: github action test
+
+# on: [push]
+
+# jobs:
+#   hello_world_job:
+#     runs-on: ubuntu-latest
+#     name: A job to say hello
+#     steps:
+#     # To use this repository's private action, you must check out the repository
+#     - name: Checkout
+#       uses: actions/checkout@v1
+#     # Use the output from the `hello` step
+#     - name: Get the output time
+#       run: echo "The time was ${{ steps.hello.outputs.time }}"
+#     # build docker image
+#     #- name: Build the Docker image
+#     #  run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+#     - name: Build the docker image through docker-compose
+#       run: docker-compose build
+#     - name: start app
+#       run: docker-compose up
+name: IDH build workflow
+
 on: [push]
 
 jobs:
-  hello_world_job:
+  build_backend:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: to build backend
     steps:
     # To use this repository's private action, you must check out the repository
-    - name: Checkout
+    - name: checkout
       uses: actions/checkout@v1
-    # Use the output from the `hello` step
-    - name: Get the output time
-      run: echo "The time was ${{ steps.hello.outputs.time }}"
-    # build docker image
-    #- name: Build the Docker image
-    #  run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-    - name: Build the docker image through docker-compose
-      run: docker-compose build
-    - name: start app
-      run: docker-compose up
+    - name: checkout submodule
+      uses: textbook/git-checkout-submodule-action@master
+    - name: npm install
+      uses: npm i
+    - name: build backend
+      uses: npm run build
