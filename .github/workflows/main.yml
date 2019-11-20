@@ -33,6 +33,8 @@ jobs:
       uses: webfactory/ssh-agent@v0.1.1
       with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      env:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
     - name: check ssh key
       run: echo $SSH_AUTH_SOCK | export
     # To use this repository's private action, you must check out the repository
