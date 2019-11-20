@@ -35,6 +35,6 @@ jobs:
     - name: checkout submodule
       uses: textbook/git-checkout-submodule-action@master
     - name: npm install
-      uses: npm i
+      run: npm install
     - name: build backend
       uses: npm run build
