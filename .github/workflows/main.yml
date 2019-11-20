@@ -33,12 +33,14 @@ jobs:
       uses: webfactory/ssh-agent@v0.1.1
       with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: check ssh key
+      run: echo $SSH_AUTH_SOCK | cat /home/runner/.ssh/id_rsa
     # To use this repository's private action, you must check out the repository
-    - name: checkout
-      uses: actions/checkout@v1
-    - name: checkout submodule
-      uses: textbook/git-checkout-submodule-action@master
-    - name: npm install
-      run: npm install
-    - name: build backend
-      run: npm run build
+    # - name: checkout
+    #   uses: actions/checkout@v1
+    # - name: checkout submodule
+    #   uses: textbook/git-checkout-submodule-action@master
+    # - name: npm install
+    #   run: npm install
+    # - name: build backend
+    #   run: npm run build
