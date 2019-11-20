@@ -45,11 +45,13 @@ jobs:
     #       echo "$SSH_PRIVATE_KEY"
     - name: check ssh key
       run: ssh-add -l
-    # To use this repository's private action, you must check out the repository
-    # - name: checkout
-    #   uses: actions/checkout@v1
-    # - name: checkout submodule
-    #   uses: textbook/git-checkout-submodule-action@master
+    To use this repository's private action, you must check out the repository
+    - name: checkout
+      uses: actions/checkout@v1
+    - name: checkout submodule
+      uses: textbook/git-checkout-submodule-action@master
+      env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
     # - name: npm install
     #   run: npm install
     # - name: build backend
