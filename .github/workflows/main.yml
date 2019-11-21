@@ -48,7 +48,8 @@ jobs:
       uses: actions/checkout@v1
     - name: checkout submodule
       run: |
-          cd dockerTest
+          echo $PWD
+          cd "$PWD/dockerTest"
           git submodule init
           git submodule update
     #   uses: textbook/git-checkout-submodule-action@master
