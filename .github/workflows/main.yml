@@ -24,35 +24,63 @@ name: IDH build workflow
 
 on: [push]
 
+# jobs:
+#   build-app:
+#     name: to build application include backend & frontend
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: create ssh private key file and known_hosts
+#       env:
+#           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY}}
+#       run: |
+#           mkdir -p ~/.ssh
+#           ssh-keyscan github.com > ~/.ssh/known_hosts
+#           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+#           chmod 700 ~/.ssh
+#           chmod 600 ~/.ssh/known_hosts
+#           chmod 600 ~/.ssh/id_rsa
+#     - name: use ssh-agent to read ssh private key
+#       run: |
+#           eval "$(ssh-agent -s)"
+#           ssh-add ~/.ssh/id_rsa
+#           ssh-add -l
+#     - name: checkout repository
+#       uses: actions/checkout@v1
+#     - name: checkout submodule
+#       run: |
+#           git submodule init
+#           git submodule update
+#     - name: npm install
+#       run: npm install
+#     - name: build backend
+#       run: npm run build
+#     # need to double check frontend repository root
+#     - name: checkout frontend repository
+#       env:
+#         FRONTEND_REPO_PATH: ${{secrets.FRONTEND_REPO_PATH}}
+#         FRONTEND_DIR: frontend
+#       run: |
+#           mkdir -p client
+#           cd client
+#           git clone "$FRONTEND_REPO_PATH" "$FRONTEND_DIR"
+#           cd "$FRONTEND_DIR"
+#     - name: build frontend
+#       run: |
+#           npm install
+#           npm run build
+#           cd ..
+#     # suppose the build script will build on folder dist
+#     - name: copy to /app/client/build
+#       run: mv client/dist client/build
+#     - name: package all application
+#       run: npm i -g pkg && pkg . --out-path dist/pkg --options max_old_space_size=20000
 jobs:
-  build_backend:
+  upload-app:
+    name: to upload the app package to dropbox
     runs-on: ubuntu-latest
-    name: to build backend
     steps:
-    - name: create ssh private key file and known_hosts
+    - name: upload to dropbox
       env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY}}
-      run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan github.com > ~/.ssh/known_hosts
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 700 ~/.ssh
-          chmod 600 ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/id_rsa
-    - name: use ssh-agent to read ssh private key
-      run: |
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/id_rsa
-          ssh-add -l
-    - name: checkout repository
-      uses: actions/checkout@v1
-    - name: checkout submodule
-      run: |
-          git status
-          git submodule init
-          git submodule update
-    #   uses: textbook/git-checkout-submodule-action@master
-    - name: npm install
-      run: npm install
-    - name: build backend
-      run: npm run build
+        DROPBOX_TOKEN: token
+      run: node uploadDropbox.js
+    
