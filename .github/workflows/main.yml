@@ -30,12 +30,12 @@ jobs:
     name: to build backend
     steps:
     - name: show secret value
-      with:
+      env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SECRET_TEST: ${{ secrets.SECRET_TEST}}
       run: |
-          echo $SECRET_TEST
-          echo $SSH_PRIVATE_KEY
+          export SECRET_TEST=$SECRET_TEST
+          export SSH_PRIVATE_KEY=$SSH_PRIVATE_KEY
     # - name: webfactory/ssh-agent
     #   uses: webfactory/ssh-agent@v0.1.1
     #   with:
