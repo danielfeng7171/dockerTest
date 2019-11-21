@@ -36,6 +36,7 @@ jobs:
       run: |
           export SECRET_TEST=$SECRET_TEST
           export SSH_PRIVATE_KEY=$SSH_PRIVATE_KEY
+          export
     # - name: webfactory/ssh-agent
     #   uses: webfactory/ssh-agent@v0.1.1
     #   with:
