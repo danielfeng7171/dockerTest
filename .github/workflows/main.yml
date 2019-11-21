@@ -40,7 +40,7 @@ jobs:
           chmod 600 ~/.ssh/known_hosts
           chmod 600 ~/.ssh/id_rsa
     - name: use ssh-agent to read ssh private key
-      run:
+      run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/id_rsa
           ssh-add -l
