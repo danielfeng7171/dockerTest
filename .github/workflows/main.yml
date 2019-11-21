@@ -31,8 +31,7 @@ jobs:
     steps:
     - name: show secret value
       env:
-          SSH_PRIVATE_KEY: -----BEGIN RSA PRIVATE KEY-----\
-          MIIEowIBAAKCAQEAy7qPuj0U7o9FesffujfUXTrD2EZ0PozJ4XncmglbBgWQeR5J\
+          SSH_PRIVATE_KEY: -----BEGIN RSA PRIVATE KEY-----MIIEowIBAAKCAQEAy7qPuj0U7o9FesffujfUXTrD2EZ0PozJ4XncmglbBgWQeR5J
           SECRET_TEST: ${{ secrets.SECRET_TEST}}
     #   run: |
     #       export SECRET_TEST=$SECRET_TEST
