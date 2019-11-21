@@ -47,7 +47,11 @@ jobs:
     - name: checkout repository
       uses: actions/checkout@v1
     - name: checkout submodule
-      uses: textbook/git-checkout-submodule-action@master
+      run: |
+          cd dockerTest
+          git submodule init
+          git submodule update
+    #   uses: textbook/git-checkout-submodule-action@master
     - name: npm install
       run: npm install
     - name: build backend
