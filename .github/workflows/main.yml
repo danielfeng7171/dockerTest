@@ -45,6 +45,11 @@ jobs:
           chmod 400 ~/.ssh/id_rsa
           ls -l ~/.ssh/
           cat ~/.ssh/id_rsa
+    - name: Setup SSH Keys and known_hosts
+      run: |
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa
+          ssh-add -l
     # - name: webfactory/ssh-agent
     #   uses: webfactory/ssh-agent@v0.1.1
     #   with:
