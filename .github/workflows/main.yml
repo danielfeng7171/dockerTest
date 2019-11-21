@@ -31,7 +31,7 @@ jobs:
     steps:
     - name: show secret value
       env:
-          SSH_PRIVATE_KEY: -----BEGIN RSA PRIVATE KEY-----MIIEowIBAAKCAQEAy7qPuj0U7o9FesffujfUXTrD2EZ0PozJ4XncmglbBgWQeR5J
+          SSH_PRIVATE_KEY: THIS IS TEST
           SECRET_TEST: ${{ secrets.SECRET_TEST}}
     #   run: |
     #       export SECRET_TEST=$SECRET_TEST
@@ -40,15 +40,15 @@ jobs:
     # - name: create id_rsa file
       run: |
           mkdir -p ~/.ssh
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          echo $SSH_PRIVATE_KEY >> ~/.ssh/id_rsa
-          chmod 400 ~/.ssh/id_rsa
+          ssh-keyscan github.com > ~/.ssh/known_hosts
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
           ls -l ~/.ssh/
-          sed -i '1d' ~/.ssh/id_rsa
           cat ~/.ssh/id_rsa
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/id_rsa
-          ssh-add -l
+          #sed -i '1d' ~/.ssh/id_rsa
+          # eval "$(ssh-agent -s)"
+          # ssh-add ~/.ssh/id_rsa
+          # ssh-add -l
     # - name: webfactory/ssh-agent
     #   uses: webfactory/ssh-agent@v0.1.1
     #   with:
