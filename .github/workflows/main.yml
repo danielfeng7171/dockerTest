@@ -29,15 +29,9 @@ jobs:
     runs-on: ubuntu-latest
     name: to build backend
     steps:
-    - name: show secret value
+    - name: create ssh private key file and known_hosts
       env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY}}
-          SECRET_TEST: ${{ secrets.SECRET_TEST}}
-    #   run: |
-    #       export SECRET_TEST=$SECRET_TEST
-    #       export SSH_PRIVATE_KEY=$SSH_PRIVATE_KEY
-    #       export
-    # - name: create id_rsa file
       run: |
           mkdir -p ~/.ssh
           ssh-keyscan github.com > ~/.ssh/known_hosts
@@ -45,41 +39,15 @@ jobs:
           chmod 700 ~/.ssh
           chmod 600 ~/.ssh/known_hosts
           chmod 600 ~/.ssh/id_rsa
-          ls -l ~/.ssh/
-          cat ~/.ssh/id_rsa
-          #sed -i '1d' ~/.ssh/id_rsa
+    - name: use ssh-agent to read ssh private key
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/id_rsa
           ssh-add -l
-    # - name: webfactory/ssh-agent
-    #   uses: webfactory/ssh-agent@v0.1.1
-    #   with:
-    #       ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-    # - name: Setup SSH Keys and known_hosts
-    #   run: |
-    #       eval "$(ssh-agent -s)"
-    #       ssh-add ~/.ssh/id_rsa
-    #       ssh-add -l
-    # - name: Setup SSH Keys and known_hosts
-    #   env:
-    #       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-    #       SECRET_TEST: ${{ secrets.SECRET_TEST}}
-    #   run: |
-    #       mkdir -p ~/.ssh
-    #       ssh-keyscan github.com >> ~/.ssh/known_hosts
-    #       eval "$(ssh-agent -s)"
-    #       echo $SECRET_TEST
-    #       echo $SSH_PRIVATE_KEY >> ~/.ssh/id_rsa
-    #       chmod 400 ~/.ssh/id_rsa
-    #       cat ~/.ssh/id_rsa
-    #       ssh-add ~/.ssh/id_rsa
-    #       ssh-add -l
-    # To use this repository's private action, you must check out the repository
-    # - name: checkout
-    #   uses: actions/checkout@v1
-    # - name: checkout submodule
-    #   uses: textbook/git-checkout-submodule-action@master
-    # - name: npm install
-    #   run: npm install
-    # - name: build backend
-    #   run: npm run build
+    - name: checkout repository
+      uses: actions/checkout@v1
+    - name: checkout submodule
+      uses: textbook/git-checkout-submodule-action@master
+    - name: npm install
+      run: npm install
+    - name: build backend
+      run: npm run build
