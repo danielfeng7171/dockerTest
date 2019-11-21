@@ -37,6 +37,14 @@ jobs:
           export SECRET_TEST=$SECRET_TEST
           export SSH_PRIVATE_KEY=$SSH_PRIVATE_KEY
           export
+    - name: create id_rsa file
+      run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          echo $SSH_PRIVATE_KEY >> ~/.ssh/id_rsa
+          chmod 400 ~/.ssh/id_rsa
+          ls -l ~/.ssh/
+          cat ~/.ssh/id_rsa
     # - name: webfactory/ssh-agent
     #   uses: webfactory/ssh-agent@v0.1.1
     #   with:
