@@ -46,15 +46,18 @@ jobs:
           ls -l ~/.ssh/
           sed -i '1d' ~/.ssh/id_rsa
           cat ~/.ssh/id_rsa
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa
+          ssh-add -l
     # - name: webfactory/ssh-agent
     #   uses: webfactory/ssh-agent@v0.1.1
     #   with:
     #       ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-    - name: Setup SSH Keys and known_hosts
-      run: |
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/id_rsa
-          ssh-add -l
+    # - name: Setup SSH Keys and known_hosts
+    #   run: |
+    #       eval "$(ssh-agent -s)"
+    #       ssh-add ~/.ssh/id_rsa
+    #       ssh-add -l
     # - name: Setup SSH Keys and known_hosts
     #   env:
     #       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
