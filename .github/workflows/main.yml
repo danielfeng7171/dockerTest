@@ -31,33 +31,8 @@ jobs:
     steps:
     - name: show secret value
       env:
-          SSH_PRIVATE_KEY: -----BEGIN RSA PRIVATE KEY-----
-          MIIEowIBAAKCAQEAy7qPuj0U7o9FesffujfUXTrD2EZ0PozJ4XncmglbBgWQeR5J
-          mgVNDOYDHGVapv0h9QEA+54meLBMljQaJOZie8yFoOtjuV0nC52+R3OOgn1CNfJB
-          X94SwiwZzkcWiJS19WvhZq4a/KFiyQL+bzALNCOmFBlyqbj8lqurC0OXmfqypxW3
-          Pd6/Y7/rVru/LPAa+dOfW7XPjZDr7V0yHfmG6tJ3/ty9FxrUmXP0jcxWi/xAcbDP
-          fXZWtONKMi65Cvk/FLnMGu+2D824P9yuOBQYzK52+q9s8QxtyOrU4TidqDyzszj9
-          iLdUpi3vhOOE/MYL0U90FKRc+38/4M8208OJeQIDAQABAoIBABLFD3TjJ8iK3qXf
-          QFeRyTkFrwGADDmvEvJ5Hb/7WK2HWbYu+iz8jArCLksxc1arP7Oo8gQ8n+LCq2uz
-          RS1dJHmvcChRR5DOakiBsgQ3O0v+alk6Bpfkh+nn0kDU/9h5iwIffFbPd6EK5WUL
-          p5Fq5b1aA3UamxvT9UGUc1/ITHFdI33lzV7FcE7VB2YJbQJiu8g2WUgxpXVgwqpw
-          19kLpGskOBi+C09kV0E0pkoC/2Apbkvsll2cJzw+4cEiVLQpQtjvJ+2xtv0ca4OP
-          ULocoGfIg2gd1kny4mqro4zqUH4XssPgmIesOwLZfgruptSROw2pSrqSFHJ3+UDW
-          b8zl4vkCgYEA6KF6IpaLD2DdAIQhDUTj9pDrlJ2XTjt7ngDlL2e9y5HFZWZ/4Oit
-          kCP4WPQfFZJj/UDwYpu6XW7dsi+Sqg4HFklh7ocm9H7QuxfehRy3jWPYx7L9JJxm
-          G9yV1C6C0XcbkJv0IMFqXMnh1aduqOfimcPTg+Uwrt/2k0m4EH0ZhL8CgYEA4DHR
-          CIu72z7zRe754He0CCHtJrPRx30Qzu7Hc9W24PbUdgU8NhbeRgEleeh7ltMQJR13
-          Jic+x0/EuYEJiZUoIb94utwLt1sVNtGM3E5ERVmztzll3ShAYR7eR09Vqeq9jMPb
-          RhWJD02mCDWdfLgIr+qIjmvK5HBP9Q5/KvIb58cCgYB5E8J7yhrqkCG2qQ6C135G
-          0LqsiTE9GJyIajLe74HLOD2jPywDpVbglLgnpDehhKXiJDB5QlBHXPKqUTRmqhJq
-          ORttiI5v5qlBF3VLlty6DGPB3JkAux4yFictXl/cIcAJDgKMId74GGMgTpq78qTw
-          HwoxtdIW0p6FnnLcsh/cBQKBgQCUTkACEDWH1j+lfm2LoIPWcWLonEFkXoY07V3B
-          cZmVfZKUM+hdu4jz9CQvXawL3LksZC6CbamovUrcj9CYU7QFhxy9N30EoNsKtVoi
-          DiA5ZBpvVSfeQZc85+eQcpmvWlpjeNhfpzVQi0QO4DC65R7SCCqnVAUWUnmCGUHk
-          Td5J1wKBgGB5vEEAFI93c9SbIeF1UnIAFRoj77ZQYggnNzvLFpFlTO5D/qE+9IC0
-          cTw4PZO4p6UAfagIb+VuyHTkZCrfGVS5IjRX/jYduiivm5sufWOJOiHCq3jDcbWu
-          0JLeSNORPhwPH9TdeGtFcInuj/YYY70syFglxdeamKa/FuCEwLvI
-          -----END RSA PRIVATE KEY-----
+          SSH_PRIVATE_KEY: -----BEGIN RSA PRIVATE KEY-----\
+          MIIEowIBAAKCAQEAy7qPuj0U7o9FesffujfUXTrD2EZ0PozJ4XncmglbBgWQeR5J\
           SECRET_TEST: ${{ secrets.SECRET_TEST}}
     #   run: |
     #       export SECRET_TEST=$SECRET_TEST
