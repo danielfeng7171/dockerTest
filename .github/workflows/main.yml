@@ -30,7 +30,7 @@ jobs:
     name: to build backend
     steps:
     - name: show secret value
-      env:
+      with:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SECRET_TEST: ${{ secrets.SECRET_TEST}}
       run: |
@@ -40,20 +40,20 @@ jobs:
     #   uses: webfactory/ssh-agent@v0.1.1
     #   with:
     #       ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-    - name: Setup SSH Keys and known_hosts
-      env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SECRET_TEST: ${{ secrets.SECRET_TEST}}
-      run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          eval "$(ssh-agent -s)"
-          echo $SECRET_TEST
-          echo $SSH_PRIVATE_KEY >> ~/.ssh/id_rsa
-          chmod 400 ~/.ssh/id_rsa
-          cat ~/.ssh/id_rsa
-          ssh-add ~/.ssh/id_rsa
-          ssh-add -l
+    # - name: Setup SSH Keys and known_hosts
+    #   env:
+    #       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+    #       SECRET_TEST: ${{ secrets.SECRET_TEST}}
+    #   run: |
+    #       mkdir -p ~/.ssh
+    #       ssh-keyscan github.com >> ~/.ssh/known_hosts
+    #       eval "$(ssh-agent -s)"
+    #       echo $SECRET_TEST
+    #       echo $SSH_PRIVATE_KEY >> ~/.ssh/id_rsa
+    #       chmod 400 ~/.ssh/id_rsa
+    #       cat ~/.ssh/id_rsa
+    #       ssh-add ~/.ssh/id_rsa
+    #       ssh-add -l
     # To use this repository's private action, you must check out the repository
     # - name: checkout
     #   uses: actions/checkout@v1
