@@ -7,14 +7,12 @@ jobs:
     name: to build application include backend & frontend
     runs-on: ubuntu-latest
     steps:
-    - name: check branch is master
-      if: github.ref == 'refs/heads/master'
-      run: export MODE=prod
-    - name: check branch is non master
-      if: github.ref != 'refs/heads/master'
-      run: export MODE=dev
-    - name: echo mode
-      run: echo $MODE
+    - name: check branch mode
+      env: 
+        BRANCH: ${{ github.ref }}
+      run: |
+          soruce checkmode.sh
+          echo $MODE
     # - name: checkout repository
     #   uses: actions/checkout@v1
     # - name: create ssh private key file and known_hosts

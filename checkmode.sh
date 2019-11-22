@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ "$BRANCH" == "master" ];then
+if [ "$BRANCH" == "refs/heads/master" ];then
 	export MODE=prod
 else
 	export MODE=dev
