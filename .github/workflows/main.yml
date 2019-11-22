@@ -7,14 +7,14 @@ jobs:
     name: to build application include backend & frontend
     runs-on: ubuntu-latest
     steps:
+    - name: checkout repository
+      uses: actions/checkout@v1
     - name: check branch mode
       env: 
         BRANCH: ${{ github.ref }}
       run: |
           soruce checkmode.sh
           echo $MODE
-    # - name: checkout repository
-    #   uses: actions/checkout@v1
     # - name: create ssh private key file and known_hosts
     #   env:
     #       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY}}
