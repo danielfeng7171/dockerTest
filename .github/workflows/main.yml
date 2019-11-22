@@ -40,7 +40,6 @@ jobs:
           npm run build
     - name: make master package
       run: npm i -g pkg && pkg . -o dist/pkg/intelligent-data-hub --options max_old_space_size=20000
-    - name: check branch name
     - name: upload executable to dropbox
       env:
         DROPBOX_TOKEN: ${{ secrets.DROPBOX_TOKEN }}
