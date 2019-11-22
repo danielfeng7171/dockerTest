@@ -1,7 +1,11 @@
 name: IDH build workflow
 
-on: [push]
-
+on:
+  push:
+    branches:
+      - master
+      - developement
+  
 jobs:
   build-app:
     name: to build application include backend & frontend
