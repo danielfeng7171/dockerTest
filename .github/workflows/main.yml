@@ -46,7 +46,7 @@ jobs:
           npm run build
           cd ../../
     - name: make master package
-      run: npm i -g pkg && pkg . -o dist/pkg/intelligent-data-hub --options max_old_space_size=20000
+      run: npm i pkg && npx pkg . -o dist/pkg/intelligent-data-hub --options max_old_space_size=20000
     - name: check branch is master
       if: github.ref == 'master'
       run: export MODE=prod
