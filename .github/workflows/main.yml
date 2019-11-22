@@ -13,7 +13,7 @@ jobs:
       env: 
         BRANCH: ${{ github.ref }}
       run: |
-          soruce checkmode.sh
+          source checkmode.sh
           echo $MODE
     # - name: create ssh private key file and known_hosts
     #   env:
