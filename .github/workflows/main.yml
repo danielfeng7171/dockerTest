@@ -6,13 +6,13 @@ jobs:
   build-app:
     name: to build application include backend & frontend
     runs-on: ubuntu-latest
+    steps:
     - name: check branch name
       env:
         BRANCH: github.ref
       run: |
           source checkmode.sh
           echo $MODE
-    steps:
     - name: checkout repository
       uses: actions/checkout@v1
     - name: create ssh private key file and known_hosts
@@ -41,12 +41,11 @@ jobs:
     - name: make master package
       run: npm i -g pkg && pkg . -o dist/pkg/intelligent-data-hub --options max_old_space_size=20000
     - name: check branch name
-    # upload to dropbox
     - name: upload executable to dropbox
       env:
         DROPBOX_TOKEN: ${{ secrets.DROPBOX_TOKEN }}
       run: node uploadDropbox.js
-    - name: build docker cassandra image
-      run: |
-        sudo apt-get install curl
-        source buildDockerImages.sh
+    # - name: build docker cassandra image
+    #   run: |
+    #     sudo apt-get install curl
+    #     source buildDockerImages.sh
