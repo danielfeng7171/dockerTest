@@ -7,55 +7,60 @@ jobs:
     name: to build application include backend & frontend
     runs-on: ubuntu-latest
     steps:
-    - name: checkout repository
-      uses: actions/checkout@v1
-    - name: create ssh private key file and known_hosts
-      env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY}}
-      run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan github.com > ~/.ssh/known_hosts
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 700 ~/.ssh
-          chmod 600 ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/id_rsa
-    - name: use ssh-agent to read ssh private key
-      run: |
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/id_rsa
-          ssh-add -l
-    - name: checkout submodule
-      run: |
-          git submodule init
-          git submodule update
-    - name: npm install for backend and build
-      run: |
-          npm install
-          npm run build
-    # # need to change check frontend repository path
-    - name: checkout frontend repository
-      env:
-        FRONTEND_REPO_PATH: git@github.com:danielfeng7171/reactHello.git
-      run: |
-          cd app
-          git clone "$FRONTEND_REPO_PATH" client
-          cd client
-    - name: npm install for frontend and build
-      run: |
-          npm install
-          npm run build
-          cd ../../
-    - name: make master package
-      run: npm i pkg && npx pkg . -o dist/pkg/intelligent-data-hub --options max_old_space_size=20000
     - name: check branch is master
       if: github.ref == 'master'
-      run: export MODE=prod
-    # upload to dropbox
-    - name: upload executable to dropbox
       env:
-        DROPBOX_TOKEN: ${{ secrets.DROPBOX_TOKEN }}
-      run: node uploadDropbox.js
-    - name: build docker cassandra image
+          BRANCH: ${{ github.ref }}
       run: |
-        sudo apt-get install curl
-        source buildDockerImages.sh
+          export MODE=prod
+          echo $MODE
+          echo $BRANCH
+    # - name: checkout repository
+    #   uses: actions/checkout@v1
+    # - name: create ssh private key file and known_hosts
+    #   env:
+    #       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY}}
+    #   run: |
+    #       mkdir -p ~/.ssh
+    #       ssh-keyscan github.com > ~/.ssh/known_hosts
+    #       echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    #       chmod 700 ~/.ssh
+    #       chmod 600 ~/.ssh/known_hosts
+    #       chmod 600 ~/.ssh/id_rsa
+    # - name: use ssh-agent to read ssh private key
+    #   run: |
+    #       eval "$(ssh-agent -s)"
+    #       ssh-add ~/.ssh/id_rsa
+    #       ssh-add -l
+    # - name: checkout submodule
+    #   run: |
+    #       git submodule init
+    #       git submodule update
+    # - name: npm install for backend and build
+    #   run: |
+    #       npm install
+    #       npm run build
+    # # need to change check frontend repository path
+    # - name: checkout frontend repository
+    #   env:
+    #     FRONTEND_REPO_PATH: git@github.com:danielfeng7171/reactHello.git
+    #   run: |
+    #       cd app
+    #       git clone "$FRONTEND_REPO_PATH" client
+    #       cd client
+    # - name: npm install for frontend and build
+    #   run: |
+    #       npm install
+    #       npm run build
+    #       cd ../../
+    # - name: make master package
+    #   run: npm i pkg && npx pkg . -o dist/pkg/intelligent-data-hub --options max_old_space_size=20000
+    # # upload to dropbox
+    # - name: upload executable to dropbox
+    #   env:
+    #     DROPBOX_TOKEN: ${{ secrets.DROPBOX_TOKEN }}
+    #   run: node uploadDropbox.js
+    # - name: build docker cassandra image
+    #   run: |
+    #     sudo apt-get install curl
+    #     source buildDockerImages.sh
