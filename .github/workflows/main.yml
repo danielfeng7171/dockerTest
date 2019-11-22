@@ -7,12 +7,6 @@ jobs:
     name: to build application include backend & frontend
     runs-on: ubuntu-latest
     steps:
-    - name: check branch name
-      env:
-        BRANCH: github.ref
-      run: |
-          source checkmode.sh
-          echo $MODE
     - name: checkout repository
       uses: actions/checkout@v1
     - name: create ssh private key file and known_hosts
@@ -34,6 +28,12 @@ jobs:
       run: |
           git submodule init
           git submodule update
+    - name: check branch name
+      env:
+        BRANCH: github.ref
+      run: |
+          source checkmode.sh
+          echo $MODE
     - name: npm install for backend and build
       run: |
           npm install
