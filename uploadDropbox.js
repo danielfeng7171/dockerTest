@@ -1,7 +1,7 @@
 const fse = require('fs-extra');
 const dropboxV2Api = require('dropbox-v2-api');
 const dropbox = dropboxV2Api.authenticate({ token: process.env.DROPBOX_TOKEN });
-const mode = process.env.MODE;
+const mode = process.env.MODE | 'dev';
 
 (() => {
     // overwrite seems not to work for binaries, thus the file will be deleted before upload

@@ -28,23 +28,34 @@ jobs:
       run: |
           git submodule init
           git submodule update
-    - name: check branch name
-      env:
-        BRANCH: github.ref
-      run: |
-          source checkmode.sh
-          echo $MODE
     - name: npm install for backend and build
       run: |
           npm install
           npm run build
+    # # need to change check frontend repository path
+    - name: checkout frontend repository
+      env:
+        FRONTEND_REPO_PATH: git@github.com:danielfeng7171/reactHello.git
+      run: |
+          cd app
+          git clone "$FRONTEND_REPO_PATH" client
+          cd client
+    - name: npm install for frontend and build
+      run: |
+          npm install
+          npm run build
+          cd ../../
     - name: make master package
       run: npm i -g pkg && pkg . -o dist/pkg/intelligent-data-hub --options max_old_space_size=20000
+    - name: check branch is master
+      if: github.ref == 'master'
+      run: export MODE=prod
+    # upload to dropbox
     - name: upload executable to dropbox
       env:
         DROPBOX_TOKEN: ${{ secrets.DROPBOX_TOKEN }}
       run: node uploadDropbox.js
-    # - name: build docker cassandra image
-    #   run: |
-    #     sudo apt-get install curl
-    #     source buildDockerImages.sh
+    - name: build docker cassandra image
+      run: |
+        sudo apt-get install curl
+        source buildDockerImages.sh
