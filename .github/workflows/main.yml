@@ -1,5 +1,6 @@
 name: IDH build workflow
 
+# reference link https://help.github.com/en/actions/automating-your-workflow-with-github-actions/workflow-syntax-for-github-actions#on
 on:
   push:
     # can use branches or branches-ignore to assign sequence of patterns matched against refs/heads
