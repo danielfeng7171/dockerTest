@@ -2,13 +2,13 @@ name: IDH build workflow
 
 on:
   push:
-    # Sequence of patterns matched against refs/heads
+    # can use branches or branches-ignore to assign sequence of patterns matched against refs/heads
     branches:
       # - master           # Push events on master branch
       - developement     # Push events on developement branch
       # - 'mona/octocat' # Push events to branches matching refs/heads/mona/octocat
       # - 'releases/**'  # Push events to branches matching refs/heads/releases/10
-    # Sequence of patterns matched against refs/tags
+    # can use tags or tags-ignore to assign sequence of patterns matched against refs/tags
     # tags:        
     #   - v1             # Push events to v1 tag
     #   - v1.*           # Push events to v1.0, v1.1, and v1.9 tags
