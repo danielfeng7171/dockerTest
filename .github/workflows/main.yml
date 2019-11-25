@@ -1,11 +1,28 @@
 name: IDH build workflow
 
-# some test
 on:
   push:
+    # Sequence of patterns matched against refs/heads
     branches:
-      - master
-      - developement
+      # - master           # Push events on master branch
+      - developement     # Push events on developement branch
+      # - 'mona/octocat' # Push events to branches matching refs/heads/mona/octocat
+      # - 'releases/**'  # Push events to branches matching refs/heads/releases/10
+    # Sequence of patterns matched against refs/tags
+    # tags:        
+    #   - v1             # Push events to v1 tag
+    #   - v1.*           # Push events to v1.0, v1.1, and v1.9 tags
+  pull_request:
+    # Sequence of patterns matched against refs/heads
+    branches:
+      - master           # Push events on master branch
+      # - developement     # Push events on developement branch
+      # - 'mona/octocat' # Push events to branches matching refs/heads/mona/octocat
+      # - 'releases/**'  # Push events to branches matching refs/heads/releases/10
+    # Sequence of patterns matched against refs/tags
+    # tags:        
+    #   - v1             # Push events to v1 tag
+    #   - v1.*           # Push events to v1.0, v1.1, and v1.9 tags
 
 jobs:
   build-app:
