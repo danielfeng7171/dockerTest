@@ -1,5 +1,5 @@
 name: IDH build workflow
-
+# this is test commit
 # reference link https://help.github.com/en/actions/automating-your-workflow-with-github-actions/workflow-syntax-for-github-actions#on
 on:
   push:
@@ -14,6 +14,7 @@ on:
     #   - v1             # Push events to v1 tag
     #   - v1.*           # Push events to v1.0, v1.1, and v1.9 tags
   pull_request:
+    types: [ closed ]
     # Sequence of patterns matched against refs/heads
     branches:
       - master           # Push events on master branch
