@@ -79,7 +79,7 @@ jobs:
       run: |
         source checkmode.sh
         echo $MODE
-        # node uploadDropbox.js
+        node uploadDropbox.js
     # - name: build docker cassandra image
     #   run: |
     #     sudo apt-get install curl
