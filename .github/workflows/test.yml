@@ -7,9 +7,13 @@ jobs:
     name: to test application
     runs-on: ubuntu-latest
     steps:
-    - name: checkout repository
-      uses: actions/checkout@v1      
-    - name: npm install
-      run: npm install
-    - name: npm run test
-      run: npm run test
+      - name: test client input
+        run: |
+          echo "field: ${{ github.event.client_payload.foo }}"
+          echo "payload: ${{ toJson(github.event.client_payload) }}"
+    # - name: checkout repository
+    #   uses: actions/checkout@v1      
+    # - name: npm install
+    #   run: npm install
+    # - name: npm run test
+    #   run: npm run test
