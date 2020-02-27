@@ -1,7 +1,7 @@
 version: '2'
 services:
   api:
-    image: docker-test
+    image: localhost:5000/docker-test
     build: .
     container_name: "docker-test"
     environment:

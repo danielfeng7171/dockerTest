@@ -69,18 +69,23 @@ jobs:
           npm install
           npm run build
           cd ../../
-    - name: make master package
-      run: npm i pkg && npx pkg . -o dist/pkg/intelligent-data-hub --options max_old_space_size=20000
-    # upload to dropbox
-    - name: upload executable to dropbox
-      env:
-        DROPBOX_TOKEN: ${{ secrets.DROPBOX_TOKEN }}
-        BRANCH: ${{ github.ref }}
-      run: |
-        source checkmode.sh
-        echo $MODE
-        node uploadDropbox.js
+    # - name: make master package
+    #   run: npm i pkg && npx pkg . -o dist/pkg/intelligent-data-hub --options max_old_space_size=20000
+    # # upload to dropbox
+    # - name: upload executable to dropbox
+    #   env:
+    #     DROPBOX_TOKEN: ${{ secrets.DROPBOX_TOKEN }}
+    #     BRANCH: ${{ github.ref }}
+    #   run: |
+    #     source checkmode.sh
+    #     echo $MODE
+    #     node uploadDropbox.js
     # - name: build docker cassandra image
     #   run: |
     #     sudo apt-get install curl
     #     source buildDockerImages.sh
+    - name: build docker image
+      run: |
+          docker-compose build
+          docker images
+          docker push localhost:5000/docker-test

@@ -9,8 +9,8 @@ ENV TZ Asia/Taipei
 # copy my project
 RUN mkdir /dockerTest
 COPY package.json /dockerTest/
-COPY src /dockerTest/src
-WORKDIR /dockerTest
+COPY app/server/src /dockerTest/app/server/src
+WORKDIR /dockerTest/app/server/
 RUN npm install
 
 # start
