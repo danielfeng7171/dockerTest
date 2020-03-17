@@ -43,12 +43,12 @@ jobs:
           chmod 700 ~/.ssh
           chmod 600 ~/.ssh/known_hosts
           chmod 600 ~/.ssh/id_rsa
+    - name: use ssh-agent to read ssh private key
+      run: |
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa
+          ssh-add -l
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa daniel@test.goldyfun.com.tw 'ls'
-    # - name: use ssh-agent to read ssh private key
-    #   run: |
-    #       eval "$(ssh-agent -s)"
-    #       ssh-add ~/.ssh/id_rsa
-    #       ssh-add -l
     # - name: checkout submodule
     #   run: |
     #       git submodule init
