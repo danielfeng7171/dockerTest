@@ -32,7 +32,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     # - name: checkout repository
-    #   uses: actions/checkout@v1      
+    #   uses: actions/checkout@v1
+    - name: test components
+      env:
+        COMPONENTS: ${{ github.event.client_payload.components }}
+      run: echo "$COMPONENTS"      
     - name: create ssh private key file and known_hosts
       env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY}}
