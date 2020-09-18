@@ -37,22 +37,22 @@ jobs:
       env:
         COMPONENTS: ${{ github.event.client_payload.components }}
       run: echo "$COMPONENTS"      
-    - name: create ssh private key file and known_hosts
-      env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY}}
-      run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan github.com > ~/.ssh/known_hosts
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 700 ~/.ssh
-          chmod 600 ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/id_rsa
-    - name: use ssh-agent to read ssh private key
-      run: |
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/id_rsa
-          ssh-add -l
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa daniel@test.goldyfun.com.tw 'ls'
+    # - name: create ssh private key file and known_hosts
+    #   env:
+    #       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY}}
+    #   run: |
+    #       mkdir -p ~/.ssh
+    #       ssh-keyscan github.com > ~/.ssh/known_hosts
+    #       echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    #       chmod 700 ~/.ssh
+    #       chmod 600 ~/.ssh/known_hosts
+    #       chmod 600 ~/.ssh/id_rsa
+    # - name: use ssh-agent to read ssh private key
+    #   run: |
+    #       eval "$(ssh-agent -s)"
+    #       ssh-add ~/.ssh/id_rsa
+    #       ssh-add -l
+    #       ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa daniel@test.goldyfun.com.tw 'ls'
     # - name: checkout submodule
     #   run: |
     #       git submodule init
